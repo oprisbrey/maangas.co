@@ -28,7 +28,7 @@
       position: relative;
     }
 
-    /* Grain overlay */
+    /* Blur overlay */
     body::before {
       content: "";
       position: fixed;
@@ -38,6 +38,7 @@
       z-index: -2;
     }
 
+    /* Subtle grain flicker */
     body::after {
       content: "";
       position: fixed;
@@ -46,13 +47,12 @@
       opacity: 0.15;
       z-index: -1;
       pointer-events: none;
-      /* Optional subtle animation */
-      animation: grainAnim 10s linear infinite;
+      animation: grainFlicker 3s infinite alternate;
     }
 
-    @keyframes grainAnim {
-      0% { transform: translate(0,0); }
-      100% { transform: translate(-100%,100%); }
+    @keyframes grainFlicker {
+      from { opacity: 0.12; }
+      to { opacity: 0.18; }
     }
 
     .container {
