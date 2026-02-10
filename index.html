@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MAANGAS — Coming Soon</title>
 
-  <!-- Google Font (fashion-y, clean) -->
+  <!-- Google Font (clean, modern) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -21,23 +21,23 @@
       font-family: 'Inter', system-ui, sans-serif;
       color: white;
       overflow: hidden;
-      background: black;
+      background-image: url("background.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
     }
 
-  body {
-  margin: 0;
-  height: 100vh;
-  font-family: 'Inter', system-ui, sans-serif;
-  color: white;
-  overflow: hidden;
-
-  background-image: url("background.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-   
     /* Grain overlay */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      backdrop-filter: blur(2px);
+      background: rgba(0, 0, 0, 0.25);
+      z-index: -2;
+    }
+
     body::after {
       content: "";
       position: fixed;
@@ -46,16 +46,14 @@
       opacity: 0.15;
       z-index: -1;
       pointer-events: none;
+      /* Optional subtle animation */
+      animation: grainAnim 10s linear infinite;
     }
 
-    body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  backdrop-filter: blur(2px);
-  background: rgba(0, 0, 0, 0.25);
-  z-index: -1;
-}
+    @keyframes grainAnim {
+      0% { transform: translate(0,0); }
+      100% { transform: translate(-100%,100%); }
+    }
 
     .container {
       height: 100%;
@@ -93,6 +91,8 @@
       border: none;
       min-width: 240px;
       font-size: 0.9rem;
+      width: 100%;
+      max-width: 300px;
     }
 
     button {
@@ -102,6 +102,7 @@
       color: black;
       font-weight: 600;
       cursor: pointer;
+      transition: all 0.3s ease;
     }
 
     button:hover {
@@ -134,25 +135,26 @@
       <p>ang bago mong paborito.</p>
 
       <!-- EMAIL SIGNUP -->
-      <!-- Replace action URL with Mailchimp / Buttondown -->
-    <form
-  action="https://buttondown.com/api/emails/embed-subscribe/maangas.co"
-  method="post"
-  target="popupwindow"
-  onsubmit="window.open('https://buttondown.com/maangas.co', 'popupwindow')"
->
-  <input
-    type="email"
-    name="email"
-    placeholder="Email address"
-    required
-  />
-  <button type="submit">Join the List</button>
-</form>
+      <form
+        action="https://buttondown.com/api/emails/embed-subscribe/maangas.co"
+        method="post"
+        target="popupwindow"
+        onsubmit="window.open('https://buttondown.com/maangas.co', 'popupwindow'); return true;"
+      >
+        <input
+          type="email"
+          name="email"
+          placeholder="Email address"
+          required
+          aria-label="Email address"
+        />
+        <button type="submit">Join the List</button>
+      </form>
+
       <!-- INSTAGRAM -->
       <a href="https://instagram.com/maangascompany" target="_blank">
-  @maangascompany
-</a>
+        @maangascompany
+      </a>
     </div>
   </div>
 
