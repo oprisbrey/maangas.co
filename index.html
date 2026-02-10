@@ -135,20 +135,19 @@
 
       <!-- EMAIL SIGNUP -->
       <!-- Replace action URL with Mailchimp / Buttondown -->
-      <form
-  action="https://buttondown.com/api/emails/embed-subscribe/maangas.co"
+    <form
+  action="https://buttondown.email/api/emails/embed-subscribe/mangas.co"
   method="post"
-  class="embeddable-buttondown-form"
-  referrerpolicy="unsafe-url"
+  target="popupwindow"
+  onsubmit="window.open('https://buttondown.email/mangas.co', 'popupwindow')"
 >
-  <label for="bd-email">Enter your email</label>
-  <input type="email" name="email" id="bd-email" />
-  <input type="submit" value="Subscribe" />
-  <p>
-    <a href="https://buttondown.com/refer/maangas.co" target="_blank">
-      Powered by Buttondown.
-    </a>
-  </p>
+  <input
+    type="email"
+    name="email"
+    placeholder="Email address"
+    required
+  />
+  <button type="submit">Join the List</button>
 </form>
       <!-- INSTAGRAM -->
       <a href="https://instagram.com/maangascompany" target="_blank">
