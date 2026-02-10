@@ -47,6 +47,23 @@
       pointer-events: none;
     }
 
+    body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(2px);
+  background: rgba(0, 0, 0, 0.25);
+  z-index: -1;
+}
+    
+    body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: -1;
+}
+
     .container {
       height: 100%;
       display: flex;
@@ -119,9 +136,18 @@
 <body>
 
   <!-- Background video (optional but elite) -->
-  <video autoplay muted loop playsinline>
-    <source src="https://cdn.coverr.co/videos/coverr-black-fabric-flowing-9712/1080p.mp4" type="video/mp4">
-  </video>
+  body {
+  margin: 0;
+  height: 100vh;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: white;
+  overflow: hidden;
+
+  background-image: url("background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
   <div class="container">
     <div>
