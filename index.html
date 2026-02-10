@@ -24,18 +24,19 @@
       background: black;
     }
 
-    /* Background video */
-    video {
-      position: fixed;
-      top: 0;
-      left: 0;
-      min-width: 100%;
-      min-height: 100%;
-      object-fit: cover;
-      opacity: 0.35;
-      z-index: -2;
-    }
+  body {
+  margin: 0;
+  height: 100vh;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: white;
+  overflow: hidden;
 
+  background-image: url("background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+   
     /* Grain overlay */
     body::after {
       content: "";
@@ -126,20 +127,6 @@
 </head>
 
 <body>
-
-  <!-- Background video (optional but elite) -->
-  body {
-  margin: 0;
-  height: 100vh;
-  font-family: 'Inter', system-ui, sans-serif;
-  color: white;
-  overflow: hidden;
-
-  background-image: url("background.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
 
   <div class="container">
     <div>
