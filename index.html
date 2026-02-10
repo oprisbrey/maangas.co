@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MAANGAS — Coming Soon</title>
 
+<!-- Preload background image for instant load -->
+<link rel="preload" as="image" href="background.jpg">
+
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,23 +22,15 @@
     font-family: 'Inter', system-ui, sans-serif;
     color: white;
     overflow: hidden;
-    background-color: black; /* fallback while image loads */
-  }
 
-  /* Fullscreen preloaded background image */
-  #bg-image {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -3;
-    opacity: 0;
-    transition: opacity 1s ease;
-  }
+    /* fallback color while image loads */
+    background-color: black;
 
-  #bg-image.loaded {
-    opacity: 1;
+    /* main background image */
+    background-image: url("background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
 
   /* Blur overlay */
@@ -65,7 +60,6 @@
     to { opacity: 0.18; }
   }
 
-  /* Container */
   .container {
     height: 100%;
     display: flex;
@@ -143,9 +137,6 @@
 </head>
 <body>
 
-<!-- Fullscreen background image -->
-<img id="bg-image" src="background.jpg" alt="Background">
-
 <div class="container">
   <div>
     <!-- Logo -->
@@ -164,12 +155,6 @@
     <a href="https://instagram.com/maangascompany" target="_blank">@maangascompany</a>
   </div>
 </div>
-
-<script>
-  // Preload background image and fade in smoothly
-  const bg = document.getElementById('bg-image');
-  bg.onload = () => bg.classList.add('loaded');
-</script>
 
 </body>
 </html>
