@@ -28,7 +28,6 @@
       text-align: center;
     }
 
-    /* Dark overlay */
     body::before {
       content: "";
       position: fixed;
@@ -78,7 +77,6 @@
 
     input:focus {
       outline: none;
-      border-color: white;
     }
 
     button {
@@ -107,12 +105,6 @@
       letter-spacing: 0.3em;
       font-weight: bold;
     }
-
-    @media (max-width: 600px) {
-      .logo {
-        width: 85%;
-      }
-    }
   </style>
 </head>
 
@@ -123,8 +115,19 @@
 
     <p class="drop-text">DROP 001 — COMING SOON</p>
 
-    <form>
-      <input type="email" placeholder="ENTER EMAIL" required>
+    <!-- BUTTONDOWN EMAIL FORM -->
+    <form
+      action="https://buttondown.com/api/emails/embed-subscribe/maangas.co"
+      method="post"
+      target="popupwindow"
+      onsubmit="window.open('https://buttondown.com/maangas.co', 'popupwindow')"
+    >
+      <input
+        type="email"
+        name="email"
+        placeholder="ENTER EMAIL"
+        required
+      >
       <button type="submit">JOIN THE LIST</button>
     </form>
   </div>
