@@ -6,12 +6,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
+* {
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
 body {
-  background:black;
-  color:white;
   font-family:'Helvetica Neue', Arial, sans-serif;
+  color:white;
+  background: url("background.jpg") no-repeat center center fixed;
+  background-size: cover;
+  background-color: black;
+}
+
+/* Dark overlay */
+body::before {
+  content:"";
+  position:fixed;
+  inset:0;
+  background: rgba(0,0,0,0.55);
+  z-index:-1;
 }
 
 /* NAV */
@@ -45,7 +60,7 @@ nav a {
   margin-top:1rem;
   font-size:0.75rem;
   letter-spacing:0.25em;
-  opacity:0.6;
+  opacity:0.7;
 }
 
 /* PRODUCTS */
@@ -105,10 +120,10 @@ nav a {
 /* SIZE SELECT */
 select {
   margin-top:1rem;
-  padding:0.7rem;
+  padding:0.8rem;
   width:100%;
   max-width:500px;
-  background:black;
+  background:transparent;
   color:white;
   border:1px solid white;
   letter-spacing:0.2em;
@@ -131,16 +146,9 @@ button {
 }
 
 button:hover {
-  background:black;
+  background:transparent;
   color:white;
   border:1px solid white;
-}
-
-.sold-out {
-  background:transparent;
-  color:gray;
-  border:1px solid gray;
-  cursor:default;
 }
 
 /* FOOTER */
@@ -154,8 +162,14 @@ footer {
 
 /* MOBILE */
 @media (max-width:768px) {
-  .products { padding:0 2rem 4rem; gap:3rem; }
-  nav { padding:1.5rem; }
+  .products {
+    padding:0 2rem 4rem;
+    gap:3rem;
+  }
+
+  nav {
+    padding:1.5rem;
+  }
 }
 </style>
 </head>
@@ -174,12 +188,12 @@ footer {
 
 <section class="products">
 
-  <!-- PRODUCT 1 -->
   <div class="product">
     <div class="product-image">
-      <img src="tee-front.jpg" class="main-img">
-      <img src="tee-back.jpg" class="hover-img">
+      <img src="tee-front.jpg" class="main-img" alt="Graphic Tee">
+      <img src="tee-back.jpg" class="hover-img" alt="Graphic Tee Back">
     </div>
+
     <div class="product-name">Graphic Tee</div>
     <div class="product-price">$45</div>
 
@@ -211,6 +225,7 @@ function updateCartCount(){
 
 function addToCart(name, price, sizeId){
   let size = document.getElementById(sizeId).value;
+
   if(size === ""){
     alert("Please select a size.");
     return;
