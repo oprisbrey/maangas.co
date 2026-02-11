@@ -6,135 +6,156 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { margin:0; padding:0; box-sizing:border-box; }
 
 body {
-  background: black;
-  color: white;
-  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background:black;
+  color:white;
+  font-family:'Helvetica Neue', Arial, sans-serif;
 }
 
 /* NAV */
 nav {
-  display: flex;
-  justify-content: space-between;
-  padding: 2rem 3rem;
-  font-size: 0.75rem;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
+  display:flex;
+  justify-content:space-between;
+  padding:2rem 3rem;
+  font-size:0.75rem;
+  letter-spacing:0.35em;
+  text-transform:uppercase;
 }
 
 nav a {
-  color: white;
-  text-decoration: none;
+  color:white;
+  text-decoration:none;
+  cursor:pointer;
 }
 
 /* HERO */
 .hero {
-  text-align: center;
-  padding: 3rem 1rem 4rem 1rem;
+  text-align:center;
+  padding:3rem 1rem 4rem;
 }
 
 .hero h1 {
-  font-size: 0.9rem;
-  letter-spacing: 0.6em;
-  font-weight: 700;
+  font-size:0.9rem;
+  letter-spacing:0.6em;
 }
 
 .hero p {
-  margin-top: 1rem;
-  font-size: 0.75rem;
-  letter-spacing: 0.25em;
-  opacity: 0.6;
+  margin-top:1rem;
+  font-size:0.75rem;
+  letter-spacing:0.25em;
+  opacity:0.6;
 }
 
 /* PRODUCTS */
 .products {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-  gap: 5rem;
-  padding: 0 5rem 6rem 5rem;
-  max-width: 1400px;
-  margin: auto;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(380px,1fr));
+  gap:5rem;
+  padding:0 5rem 6rem;
+  max-width:1400px;
+  margin:auto;
 }
 
 .product {
-  text-align: center;
+  text-align:center;
 }
 
-.product img {
-  width: 100%;
-  max-width: 500px;
-  margin: auto;
-  display: block;
+.product-image {
+  position:relative;
+}
+
+.product-image img {
+  width:100%;
+  max-width:500px;
+  display:block;
+  margin:auto;
+  transition:0.4s ease;
+}
+
+.product-image img.hover-img {
+  position:absolute;
+  top:0;
+  left:0;
+  opacity:0;
+}
+
+.product-image:hover img.hover-img {
+  opacity:1;
+}
+
+.product-image:hover img.main-img {
+  opacity:0;
 }
 
 .product-name {
-  margin-top: 1.8rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  font-size: 0.75rem;
-  font-weight: 600;
+  margin-top:1.8rem;
+  letter-spacing:0.3em;
+  font-size:0.75rem;
+  text-transform:uppercase;
 }
 
 .product-price {
-  margin-top: 0.8rem;
-  font-size: 0.75rem;
-  letter-spacing: 0.2em;
+  margin-top:0.8rem;
+  font-size:0.75rem;
+  letter-spacing:0.2em;
 }
 
-/* BUTTONS */
+/* SIZE SELECT */
+select {
+  margin-top:1rem;
+  padding:0.7rem;
+  width:100%;
+  max-width:500px;
+  background:black;
+  color:white;
+  border:1px solid white;
+  letter-spacing:0.2em;
+}
+
+/* BUTTON */
 button {
-  margin-top: 1.5rem;
-  padding: 1rem;
-  width: 100%;
-  max-width: 500px;
-  background: white;
-  color: black;
-  border: none;
-  font-weight: bold;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: 0.25s ease;
+  margin-top:1.2rem;
+  padding:1rem;
+  width:100%;
+  max-width:500px;
+  background:white;
+  color:black;
+  border:none;
+  font-weight:bold;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:0.25s ease;
 }
 
 button:hover {
-  background: black;
-  color: white;
-  border: 1px solid white;
+  background:black;
+  color:white;
+  border:1px solid white;
 }
 
 .sold-out {
-  background: transparent;
-  color: gray;
-  border: 1px solid gray;
-  cursor: default;
+  background:transparent;
+  color:gray;
+  border:1px solid gray;
+  cursor:default;
 }
 
 /* FOOTER */
 footer {
-  text-align: center;
-  padding: 4rem 1rem;
-  font-size: 0.65rem;
-  letter-spacing: 0.4em;
-  opacity: 0.5;
+  text-align:center;
+  padding:4rem 1rem;
+  font-size:0.65rem;
+  letter-spacing:0.4em;
+  opacity:0.5;
 }
 
 /* MOBILE */
-@media (max-width: 768px) {
-  .products {
-    padding: 0 2rem 4rem 2rem;
-    gap: 3rem;
-  }
-
-  nav {
-    padding: 1.5rem;
-  }
+@media (max-width:768px) {
+  .products { padding:0 2rem 4rem; gap:3rem; }
+  nav { padding:1.5rem; }
 }
 </style>
 </head>
@@ -143,7 +164,7 @@ footer {
 
 <nav>
   <a href="index.html">MAANGAS</a>
-  <a href="#">CART (0)</a>
+  <a onclick="viewCart()">CART (<span id="cart-count">0</span>)</a>
 </nav>
 
 <section class="hero">
@@ -153,18 +174,26 @@ footer {
 
 <section class="products">
 
+  <!-- PRODUCT 1 -->
   <div class="product">
-    <img src="tee-front.jpg" alt="Graphic Tee">
+    <div class="product-image">
+      <img src="tee-front.jpg" class="main-img">
+      <img src="tee-back.jpg" class="hover-img">
+    </div>
     <div class="product-name">Graphic Tee</div>
     <div class="product-price">$45</div>
-    <button>Add to Cart</button>
-  </div>
 
-  <div class="product">
-    <img src="hoodie-front.jpg" alt="Heavyweight Hoodie">
-    <div class="product-name">Heavyweight Hoodie</div>
-    <div class="product-price">$95</div>
-    <button class="sold-out">Sold Out</button>
+    <select id="size-tee">
+      <option value="">Select Size</option>
+      <option>S</option>
+      <option>M</option>
+      <option>L</option>
+      <option>XL</option>
+    </select>
+
+    <button onclick="addToCart('Graphic Tee',45,'size-tee')">
+      Add to Cart
+    </button>
   </div>
 
 </section>
@@ -173,7 +202,46 @@ footer {
   MAANGAS © 2026
 </footer>
 
-</body>
-</html>
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function updateCartCount(){
+  document.getElementById("cart-count").innerText = cart.length;
+}
+
+function addToCart(name, price, sizeId){
+  let size = document.getElementById(sizeId).value;
+  if(size === ""){
+    alert("Please select a size.");
+    return;
+  }
+
+  cart.push({name, price, size});
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartCount();
+  alert("Added to cart.");
+}
+
+function viewCart(){
+  if(cart.length === 0){
+    alert("Cart is empty.");
+    return;
+  }
+
+  let summary = "YOUR CART:\n\n";
+  let total = 0;
+
+  cart.forEach(item=>{
+    summary += item.name + " (" + item.size + ") - $" + item.price + "\n";
+    total += item.price;
+  });
+
+  summary += "\nTotal: $" + total;
+  alert(summary);
+}
+
+updateCartCount();
+</script>
+
 </body>
 </html>
