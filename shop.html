@@ -151,6 +151,87 @@ button:hover {
   border:1px solid white;
 }
 
+/* SLIDE CART PANEL */
+.cart-panel {
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 380px;
+  height: 100%;
+  background: black;
+  border-left: 1px solid rgba(255,255,255,0.2);
+  padding: 2rem;
+  transition: right 0.4s ease;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-panel.open {
+  right: 0;
+}
+
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  letter-spacing: 0.3em;
+  font-size: 0.7rem;
+  margin-bottom: 2rem;
+}
+
+.cart-items {
+  flex: 1;
+  overflow-y: auto;
+  font-size: 0.75rem;
+}
+
+.cart-item {
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 1rem;
+}
+
+.cart-item span {
+  display:block;
+  margin-top:0.3rem;
+  opacity:0.7;
+}
+
+.remove-btn {
+  margin-top:0.5rem;
+  background:none;
+  border:none;
+  color:gray;
+  font-size:0.6rem;
+  letter-spacing:0.2em;
+  cursor:pointer;
+}
+
+.cart-total {
+  margin-top:1.5rem;
+  font-size:0.8rem;
+  letter-spacing:0.3em;
+}
+
+.checkout-btn {
+  margin-top:1rem;
+  padding:1rem;
+  background:white;
+  color:black;
+  border:none;
+  text-transform:uppercase;
+  letter-spacing:0.2em;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.checkout-btn:hover {
+  background:black;
+  color:white;
+  border:1px solid white;
+}
+
 /* FOOTER */
 footer {
   text-align:center;
@@ -162,14 +243,8 @@ footer {
 
 /* MOBILE */
 @media (max-width:768px) {
-  .products {
-    padding:0 2rem 4rem;
-    gap:3rem;
-  }
-
-  nav {
-    padding:1.5rem;
-  }
+  .products { padding:0 2rem 4rem; gap:3rem; }
+  nav { padding:1.5rem; }
 }
 </style>
 </head>
@@ -178,7 +253,7 @@ footer {
 
 <nav>
   <a href="index.html">MAANGAS</a>
-  <a onclick="viewCart()">CART (<span id="cart-count">0</span>)</a>
+  <a onclick="toggleCart()">CART (<span id="cart-count">0</span>)</a>
 </nav>
 
 <section class="hero">
@@ -187,11 +262,10 @@ footer {
 </section>
 
 <section class="products">
-
   <div class="product">
     <div class="product-image">
-      <img src="tee-front.jpg" class="main-img" alt="Graphic Tee">
-      <img src="tee-back.jpg" class="hover-img" alt="Graphic Tee Back">
+      <img src="tee-front.jpg" class="main-img">
+      <img src="tee-back.jpg" class="hover-img">
     </div>
 
     <div class="product-name">Graphic Tee</div>
@@ -209,18 +283,35 @@ footer {
       Add to Cart
     </button>
   </div>
-
 </section>
 
 <footer>
   MAANGAS © 2026
 </footer>
 
+<!-- CART PANEL -->
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-header">
+    <div>CART</div>
+    <div style="cursor:pointer;" onclick="toggleCart()">✕</div>
+  </div>
+
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-total" id="cartTotal"></div>
+
+  <button class="checkout-btn">Checkout</button>
+</div>
+
 <script>
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 function updateCartCount(){
   document.getElementById("cart-count").innerText = cart.length;
+}
+
+function toggleCart(){
+  document.getElementById("cartPanel").classList.toggle("open");
+  renderCart();
 }
 
 function addToCart(name, price, sizeId){
@@ -234,25 +325,37 @@ function addToCart(name, price, sizeId){
   cart.push({name, price, size});
   localStorage.setItem("cart", JSON.stringify(cart));
   updateCartCount();
-  alert("Added to cart.");
+  renderCart();
 }
 
-function viewCart(){
-  if(cart.length === 0){
-    alert("Cart is empty.");
-    return;
-  }
+function renderCart(){
+  const cartItems = document.getElementById("cartItems");
+  const cartTotal = document.getElementById("cartTotal");
 
-  let summary = "YOUR CART:\n\n";
+  cartItems.innerHTML = "";
   let total = 0;
 
-  cart.forEach(item=>{
-    summary += item.name + " (" + item.size + ") - $" + item.price + "\n";
+  cart.forEach((item, index) => {
     total += item.price;
+
+    cartItems.innerHTML += `
+      <div class="cart-item">
+        ${item.name}
+        <span>Size: ${item.size}</span>
+        <span>$${item.price}</span>
+        <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+      </div>
+    `;
   });
 
-  summary += "\nTotal: $" + total;
-  alert(summary);
+  cartTotal.innerText = "TOTAL — $" + total;
+}
+
+function removeItem(index){
+  cart.splice(index, 1);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartCount();
+  renderCart();
 }
 
 updateCartCount();
