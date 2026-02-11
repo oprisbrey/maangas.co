@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>MAANGAS — SHOP</title>
+<title>MAANGAS — DROP 001</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -18,53 +18,107 @@ body {
   font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
-header {
+/* NAV */
+nav {
+  display: flex;
+  justify-content: space-between;
   padding: 2rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+}
+
+/* HERO */
+.hero {
   text-align: center;
-  letter-spacing: 0.4em;
+  padding: 4rem 2rem;
+}
+
+.hero h1 {
+  font-size: 1rem;
+  letter-spacing: 0.5em;
   font-weight: bold;
 }
 
+.hero p {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  opacity: 0.7;
+}
+
+/* PRODUCT GRID */
 .products {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 3rem;
   padding: 3rem;
+  max-width: 1400px;
+  margin: auto;
 }
 
 .product {
   text-align: center;
 }
 
+.product-image {
+  position: relative;
+  overflow: hidden;
+}
+
 .product img {
   width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
+  display: block;
+  transition: opacity 0.4s ease;
+}
+
+/* Hover image swap */
+.product img.hover-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.product:hover img.hover-img {
+  opacity: 1;
+}
+
+.product:hover img.main-img {
+  opacity: 0;
 }
 
 .product-name {
-  margin-top: 1rem;
-  letter-spacing: 0.2em;
+  margin-top: 1.2rem;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
   font-size: 0.8rem;
 }
 
 .product-price {
-  margin-top: 0.5rem;
+  margin-top: 0.6rem;
   font-size: 0.8rem;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.15em;
 }
 
+/* Button */
 button {
-  margin-top: 1rem;
+  margin-top: 1.2rem;
   padding: 0.8rem;
   width: 100%;
   background: white;
   color: black;
   border: none;
   font-weight: bold;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
   cursor: pointer;
+  transition: 0.25s ease;
 }
 
 button:hover {
@@ -72,30 +126,64 @@ button:hover {
   color: white;
   border: 1px solid white;
 }
+
+/* Sold out style */
+.sold-out {
+  background: transparent;
+  color: gray;
+  border: 1px solid gray;
+  cursor: default;
+}
+
+footer {
+  text-align: center;
+  padding: 3rem 1rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  opacity: 0.5;
+}
 </style>
 </head>
 
 <body>
 
-<header>MAANGAS — DROP 001</header>
+<nav>
+  <a href="index.html">MAANGAS</a>
+  <a href="#">CART (0)</a>
+</nav>
+
+<section class="hero">
+  <h1>DROP 001</h1>
+  <p>LIMITED RELEASE</p>
+</section>
 
 <section class="products">
 
   <div class="product">
-    <img src="product1.jpg" alt="Product 1">
+    <div class="product-image">
+      <img src="tee-front.jpg" class="main-img" alt="Graphic Tee">
+      <img src="tee-back.jpg" class="hover-img" alt="Graphic Tee Back">
+    </div>
     <div class="product-name">Graphic Tee</div>
     <div class="product-price">$45</div>
     <button>Add to Cart</button>
   </div>
 
   <div class="product">
-    <img src="product2.jpg" alt="Product 2">
+    <div class="product-image">
+      <img src="hoodie-front.jpg" class="main-img" alt="Hoodie">
+      <img src="hoodie-back.jpg" class="hover-img" alt="Hoodie Back">
+    </div>
     <div class="product-name">Heavyweight Hoodie</div>
     <div class="product-price">$95</div>
-    <button>Add to Cart</button>
+    <button class="sold-out">Sold Out</button>
   </div>
 
 </section>
+
+<footer>
+  MAANGAS © 2026
+</footer>
 
 </body>
 </html>
