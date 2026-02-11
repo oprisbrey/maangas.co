@@ -1,160 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MAANGAS — Coming Soon</title>
+  <meta charset="UTF-8">
+  <title>MAANGAS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Preload background image for instant load -->
-<link rel="preload" as="image" href="background.jpg">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-<!-- Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    html, body {
+      height: 100%;
+    }
 
-<style>
-  * { box-sizing: border-box; }
+    body {
+      background: url('background.jpg') no-repeat center center;
+      background-size: cover;
+      background-color: black;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
 
-  html, body {
-    margin: 0;
-    height: 100%;
-    font-family: 'Inter', system-ui, sans-serif;
-    color: white;
-    overflow: hidden;
+    /* Dark overlay */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: -1;
+    }
 
-    /* fallback color while image loads */
-    background-color: black;
+    .container {
+      width: 90%;
+      max-width: 500px;
+    }
 
-    /* main background image */
-    background-image: url("background.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
+    .logo {
+      width: 75%;
+      max-width: 320px;
+      margin-bottom: 2.5rem;
+    }
 
-  /* Blur overlay */
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    backdrop-filter: blur(2px);
-    background: rgba(0,0,0,0.25);
-    z-index: -2;
-  }
+    .drop-text {
+      font-size: 0.9rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 2rem;
+    }
 
-  /* Subtle grain flicker */
-  body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
-    opacity: 0.15;
-    z-index: -1;
-    pointer-events: none;
-    animation: grainFlicker 3s infinite alternate;
-  }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
 
-  @keyframes grainFlicker {
-    from { opacity: 0.12; }
-    to { opacity: 0.18; }
-  }
+    input {
+      padding: 1rem;
+      background: transparent;
+      border: 2px solid white;
+      color: white;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
 
-  .container {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 2rem;
-    animation: fadeIn 1.5s ease;
-  }
+    input::placeholder {
+      color: rgba(255,255,255,0.7);
+    }
 
-  /* Logo */
-  .logo {
-    max-width: 150px;
-    width: 50%;
-    height: auto;
-    margin-bottom: 1rem;
-  }
+    input:focus {
+      outline: none;
+      border-color: white;
+    }
 
-  h1 {
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    letter-spacing: 0.2em;
-    margin-bottom: 1rem;
-    font-weight: 600;
-  }
+    button {
+      padding: 1rem;
+      background: white;
+      color: black;
+      border: none;
+      font-weight: bold;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
 
-  p {
-    opacity: 0.75;
-    margin-bottom: 2rem;
-    font-weight: 300;
-  }
+    button:hover {
+      background: black;
+      color: white;
+      border: 2px solid white;
+    }
 
-  form {
-    display: flex;
-    gap: 0.5rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 2rem;
-  }
+    .footer-mark {
+      position: fixed;
+      bottom: 25px;
+      left: 25px;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      font-weight: bold;
+    }
 
-  input {
-    padding: 0.75rem 1rem;
-    border: none;
-    min-width: 240px;
-    font-size: 0.9rem;
-    width: 100%;
-    max-width: 300px;
-  }
-
-  button {
-    padding: 0.75rem 1.25rem;
-    border: none;
-    background: white;
-    color: black;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  button:hover { opacity: 0.85; }
-
-  a {
-    color: white;
-    text-decoration: none;
-    font-size: 0.85rem;
-    opacity: 0.8;
-  }
-
-  a:hover { opacity: 1; }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-</style>
+    @media (max-width: 600px) {
+      .logo {
+        width: 85%;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="container">
-  <div>
-    <!-- Logo -->
-    <img src="logo.png" alt="MAANGAS Logo" class="logo">
+  <div class="container">
+    <img src="logo.png" alt="MAANGAS" class="logo">
 
-    <h1>MAANGAS</h1>
-    <p>ang bago mong paborito</p>
+    <p class="drop-text">DROP 001 — COMING SOON</p>
 
-    <!-- EMAIL SIGNUP -->
-    <form action="https://buttondown.com/api/emails/embed-subscribe/maangas.co" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.com/maangas.co', 'popupwindow'); return true;">
-      <input type="email" name="email" placeholder="Email address" required aria-label="Email address">
-      <button type="submit">Join the List</button>
+    <form>
+      <input type="email" placeholder="ENTER EMAIL" required>
+      <button type="submit">JOIN THE LIST</button>
     </form>
-
-    <!-- Instagram link -->
-    <a href="https://instagram.com/maangascompany" target="_blank">@maangascompany</a>
   </div>
-</div>
+
+  <div class="footer-mark">MAANGAS © 2026</div>
 
 </body>
 </html>
