@@ -6,12 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-* {
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
+/* ===== GENERAL ===== */
+* { margin:0; padding:0; box-sizing:border-box; }
 body {
   font-family:'Helvetica Neue', Arial, sans-serif;
   color:white;
@@ -19,8 +15,6 @@ body {
   background-size: cover;
   background-color: black;
 }
-
-/* Dark overlay */
 body::before {
   content:"";
   position:fixed;
@@ -29,7 +23,7 @@ body::before {
   z-index:-1;
 }
 
-/* NAV */
+/* ===== NAV ===== */
 nav {
   display:flex;
   justify-content:space-between;
@@ -38,103 +32,43 @@ nav {
   letter-spacing:0.35em;
   text-transform:uppercase;
 }
+nav a { color:white; text-decoration:none; cursor:pointer; }
 
-nav a {
-  color:white;
-  text-decoration:none;
-  cursor:pointer;
-}
+/* ===== HERO ===== */
+.hero { text-align:center; padding:3rem 1rem 4rem; }
+.hero h1 { font-size:0.9rem; letter-spacing:0.6em; }
+.hero p { margin-top:1rem; font-size:0.75rem; letter-spacing:0.25em; opacity:0.7; }
 
-/* HERO */
-.hero {
-  text-align:center;
-  padding:3rem 1rem 4rem;
-}
-
-.hero h1 {
-  font-size:0.9rem;
-  letter-spacing:0.6em;
-}
-
-.hero p {
-  margin-top:1rem;
-  font-size:0.75rem;
-  letter-spacing:0.25em;
-  opacity:0.7;
-}
-
-/* PRODUCTS */
+/* ===== PRODUCTS ===== */
 .products {
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(380px,1fr));
-  gap:5rem;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:4rem;
   padding:0 5rem 6rem;
   max-width:1400px;
   margin:auto;
 }
-
-.product {
-  text-align:center;
-}
-
-.product-image {
-  position:relative;
-}
-
-.product-image img {
-  width:100%;
-  max-width:500px;
-  display:block;
-  margin:auto;
-  transition:0.4s ease;
-}
-
-.product-image img.hover-img {
-  position:absolute;
-  top:0;
-  left:0;
-  opacity:0;
-}
-
-.product-image:hover img.hover-img {
-  opacity:1;
-}
-
-.product-image:hover img.main-img {
-  opacity:0;
-}
-
-.product-name {
-  margin-top:1.8rem;
-  letter-spacing:0.3em;
-  font-size:0.75rem;
-  text-transform:uppercase;
-}
-
-.product-price {
-  margin-top:0.8rem;
-  font-size:0.75rem;
-  letter-spacing:0.2em;
-}
-
-/* SIZE SELECT */
+.product { text-align:center; }
+.product-image { position:relative; }
+.product-image img { width:100%; display:block; margin:auto; transition:0.4s ease; }
+.product-image img.hover-img { position:absolute; top:0; left:0; opacity:0; }
+.product-image:hover img.hover-img { opacity:1; }
+.product-image:hover img.main-img { opacity:0; }
+.product-name { margin-top:1.8rem; letter-spacing:0.3em; font-size:0.75rem; text-transform:uppercase; }
+.product-price { margin-top:0.8rem; font-size:0.75rem; letter-spacing:0.2em; }
 select {
   margin-top:1rem;
   padding:0.8rem;
   width:100%;
-  max-width:500px;
   background:transparent;
   color:white;
   border:1px solid white;
   letter-spacing:0.2em;
 }
-
-/* BUTTON */
 button {
   margin-top:1.2rem;
   padding:1rem;
   width:100%;
-  max-width:500px;
   background:white;
   color:black;
   border:none;
@@ -144,14 +78,13 @@ button {
   cursor:pointer;
   transition:0.25s ease;
 }
-
 button:hover {
   background:transparent;
   color:white;
   border:1px solid white;
 }
 
-/* SLIDE CART PANEL */
+/* ===== CART PANEL ===== */
 .cart-panel {
   position: fixed;
   top: 0;
@@ -166,86 +99,25 @@ button:hover {
   display: flex;
   flex-direction: column;
 }
+.cart-panel.open { right: 0; }
+.cart-header { display: flex; justify-content: space-between; align-items: center; letter-spacing: 0.3em; font-size: 0.7rem; margin-bottom: 2rem; }
+.cart-items { flex: 1; overflow-y: auto; font-size: 0.75rem; }
+.cart-item { margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem; }
+.cart-item span { display:block; margin-top:0.3rem; opacity:0.7; }
+.remove-btn { margin-top:0.5rem; background:none; border:none; color:gray; font-size:0.6rem; letter-spacing:0.2em; cursor:pointer; }
+.cart-total { margin-top:1.5rem; font-size:0.8rem; letter-spacing:0.3em; }
+.checkout-btn { margin-top:1rem; padding:1rem; background:white; color:black; border:none; text-transform:uppercase; letter-spacing:0.2em; cursor:pointer; transition:0.3s; }
+.checkout-btn:hover { background:black; color:white; border:1px solid white; }
 
-.cart-panel.open {
-  right: 0;
-}
+/* ===== FOOTER ===== */
+footer { text-align:center; padding:4rem 1rem; font-size:0.65rem; letter-spacing:0.4em; opacity:0.5; }
 
-.cart-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  letter-spacing: 0.3em;
-  font-size: 0.7rem;
-  margin-bottom: 2rem;
-}
-
-.cart-items {
-  flex: 1;
-  overflow-y: auto;
-  font-size: 0.75rem;
-}
-
-.cart-item {
-  margin-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  padding-bottom: 1rem;
-}
-
-.cart-item span {
-  display:block;
-  margin-top:0.3rem;
-  opacity:0.7;
-}
-
-.remove-btn {
-  margin-top:0.5rem;
-  background:none;
-  border:none;
-  color:gray;
-  font-size:0.6rem;
-  letter-spacing:0.2em;
-  cursor:pointer;
-}
-
-.cart-total {
-  margin-top:1.5rem;
-  font-size:0.8rem;
-  letter-spacing:0.3em;
-}
-
-.checkout-btn {
-  margin-top:1rem;
-  padding:1rem;
-  background:white;
-  color:black;
-  border:none;
-  text-transform:uppercase;
-  letter-spacing:0.2em;
-  cursor:pointer;
-  transition:0.3s;
-}
-
-.checkout-btn:hover {
-  background:black;
-  color:white;
-  border:1px solid white;
-}
-
-/* FOOTER */
-footer {
-  text-align:center;
-  padding:4rem 1rem;
-  font-size:0.65rem;
-  letter-spacing:0.4em;
-  opacity:0.5;
-}
-
-/* MOBILE */
+/* ===== MOBILE ===== */
 @media (max-width:768px) {
   .products { padding:0 2rem 4rem; gap:3rem; }
   nav { padding:1.5rem; }
 }
+@media(max-width:400px){ .cart-panel{ width:100%; } }
 </style>
 </head>
 
@@ -261,28 +133,8 @@ footer {
   <p>LIMITED RELEASE</p>
 </section>
 
-<section class="products">
-  <div class="product">
-    <div class="product-image">
-      <img src="tee-front.jpg" class="main-img">
-      <img src="tee-back.jpg" class="hover-img">
-    </div>
-
-    <div class="product-name">Graphic Tee</div>
-    <div class="product-price">$45</div>
-
-    <select id="size-tee">
-      <option value="">Select Size</option>
-      <option>S</option>
-      <option>M</option>
-      <option>L</option>
-      <option>XL</option>
-    </select>
-
-    <button onclick="addToCart('Graphic Tee',45,'size-tee')">
-      Add to Cart
-    </button>
-  </div>
+<section class="products" id="products">
+  <!-- Products injected via JS -->
 </section>
 
 <footer>
@@ -295,14 +147,20 @@ footer {
     <div>CART</div>
     <div style="cursor:pointer;" onclick="toggleCart()">✕</div>
   </div>
-
   <div class="cart-items" id="cartItems"></div>
   <div class="cart-total" id="cartTotal"></div>
-
   <button class="checkout-btn">Checkout</button>
 </div>
 
 <script>
+// ===== PRODUCTS DATA =====
+const productsData = [
+  { name: "Graphic Tee", price: 45, imageFront: "tee-front.jpg", imageBack: "tee-back.jpg", sizes: ["S","M","L","XL"] },
+  { name: "Hoodie", price: 65, imageFront: "hoodie-front.jpg", imageBack: "hoodie-back.jpg", sizes: ["S","M","L","XL"] },
+  { name: "Cap", price: 25, imageFront: "cap-front.jpg", imageBack: "cap-back.jpg", sizes: ["One Size"] }
+];
+
+// ===== CART =====
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 function updateCartCount(){
@@ -314,13 +172,34 @@ function toggleCart(){
   renderCart();
 }
 
+// ===== RENDER PRODUCTS =====
+function renderProducts(){
+  const container = document.getElementById("products");
+  container.innerHTML = "";
+  
+  productsData.forEach((product, idx) => {
+    container.innerHTML += `
+      <div class="product">
+        <div class="product-image">
+          <img src="${product.imageFront}" alt="${product.name} Front" class="main-img">
+          <img src="${product.imageBack}" alt="${product.name} Back" class="hover-img">
+        </div>
+        <div class="product-name">${product.name}</div>
+        <div class="product-price">$${product.price}</div>
+        <select id="size-${idx}">
+          <option value="">Select Size</option>
+          ${product.sizes.map(size => `<option>${size}</option>`).join("")}
+        </select>
+        <button onclick="addToCart('${product.name}', ${product.price}, 'size-${idx}')">Add to Cart</button>
+      </div>
+    `;
+  });
+}
+
+// ===== CART FUNCTIONS =====
 function addToCart(name, price, sizeId){
   let size = document.getElementById(sizeId).value;
-
-  if(size === ""){
-    alert("Please select a size.");
-    return;
-  }
+  if(size === "") { alert("Please select a size."); return; }
 
   cart.push({name, price, size});
   localStorage.setItem("cart", JSON.stringify(cart));
@@ -331,13 +210,11 @@ function addToCart(name, price, sizeId){
 function renderCart(){
   const cartItems = document.getElementById("cartItems");
   const cartTotal = document.getElementById("cartTotal");
-
   cartItems.innerHTML = "";
   let total = 0;
 
   cart.forEach((item, index) => {
     total += item.price;
-
     cartItems.innerHTML += `
       <div class="cart-item">
         ${item.name}
@@ -347,7 +224,6 @@ function renderCart(){
       </div>
     `;
   });
-
   cartTotal.innerText = "TOTAL — $" + total;
 }
 
@@ -358,6 +234,8 @@ function removeItem(index){
   renderCart();
 }
 
+// ===== INIT =====
+renderProducts();
 updateCartCount();
 </script>
 
