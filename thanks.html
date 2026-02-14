@@ -17,14 +17,16 @@
     }
 
     body {
-      background-color: black;
-      color: white;
+      background: black;
       font-family: 'Helvetica Neue', Arial, sans-serif;
+      color: white;
       display: flex;
       justify-content: center;
       align-items: center;
       text-align: center;
       animation: fadeIn 1.2s ease forwards;
+      position: relative;
+      overflow: hidden;
     }
 
     @keyframes fadeIn {
@@ -32,14 +34,31 @@
       to { opacity: 1; }
     }
 
-    .container {
-      max-width: 600px;
-      width: 90%;
+    /* Subtle grain */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+      opacity: 0.07;
+      pointer-events: none;
     }
 
-    .small-text {
+    .container {
+      width: 90%;
+      max-width: 600px;
+    }
+
+    .logo {
+      width: 70%;
+      max-width: 260px;
+      margin-bottom: 3rem;
+      opacity: 0.95;
+    }
+
+    .status {
       font-size: 0.7rem;
-      letter-spacing: 0.4em;
+      letter-spacing: 0.45em;
       text-transform: uppercase;
       opacity: 0.6;
       margin-bottom: 2rem;
@@ -58,9 +77,10 @@
       text-transform: uppercase;
       opacity: 0.75;
       margin-bottom: 3rem;
+      line-height: 1.6;
     }
 
-    .return {
+    .enter {
       display: inline-block;
       font-size: 0.7rem;
       letter-spacing: 0.35em;
@@ -72,7 +92,7 @@
       transition: opacity 0.3s ease;
     }
 
-    .return:hover {
+    .enter:hover {
       opacity: 0.6;
     }
 
@@ -84,6 +104,12 @@
       letter-spacing: 0.3em;
       font-weight: bold;
     }
+
+    @media (max-width: 600px) {
+      .headline {
+        font-size: 1.1rem;
+      }
+    }
   </style>
 </head>
 
@@ -91,19 +117,21 @@
 
   <div class="container">
 
-    <div class="small-text">MAANGAS 2026</div>
+    <img src="logo.png" alt="MAANGAS" class="logo">
+
+    <div class="status">MEMBER STATUS CONFIRMED</div>
 
     <div class="headline">
       ACCESS GRANTED
     </div>
 
     <div class="sub-text">
-      You’re now part of Drop 001.<br>
-      Details will be sent before release.
+      You are now part of Drop 001.<br>
+      Release details will be delivered privately.
     </div>
 
-    <a href="index.html" class="return">
-      Return
+    <a href="early.html" class="enter">
+      ENTER MEMBERS AREA
     </a>
 
   </div>
