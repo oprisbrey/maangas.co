@@ -1,142 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>ACCESS GRANTED — MAANGAS</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Access Granted — MAANGAS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    html, body {
-      height: 100%;
-    }
+html, body {
+  height: 100%;
+}
 
-    body {
-      background: black;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      animation: fadeIn 1.2s ease forwards;
-      position: relative;
-      overflow: hidden;
-    }
+body {
+  background: #000;
+  color: #fff;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+}
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+/* Grain overlay */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.06;
+  pointer-events: none;
+}
 
-    /* Subtle grain */
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image: url("https://grainy-gradients.vercel.app/noise.svg");
-      opacity: 0.07;
-      pointer-events: none;
-    }
+/* Fade in animation */
+.container {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: reveal 1.6s ease forwards;
+  animation-delay: 0.4s;
+  max-width: 650px;
+  width: 90%;
+}
 
-    .container {
-      width: 90%;
-      max-width: 600px;
-    }
+@keyframes reveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-    .logo {
-      width: 70%;
-      max-width: 260px;
-      margin-bottom: 3rem;
-      opacity: 0.95;
-    }
+.logo {
+  width: 65%;
+  max-width: 240px;
+  margin-bottom: 3rem;
+  opacity: 0.9;
+}
 
-    .status {
-      font-size: 0.7rem;
-      letter-spacing: 0.45em;
-      text-transform: uppercase;
-      opacity: 0.6;
-      margin-bottom: 2rem;
-    }
+.status {
+  font-size: 0.65rem;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin-bottom: 2rem;
+}
 
-    .headline {
-      font-size: 1.4rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      margin-bottom: 2rem;
-    }
+.headline {
+  font-size: 1.5rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeText 1.2s ease forwards;
+  animation-delay: 1.2s;
+}
 
-    .sub-text {
-      font-size: 0.85rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      opacity: 0.75;
-      margin-bottom: 3rem;
-      line-height: 1.6;
-    }
+.sub-text {
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0;
+  margin-bottom: 3rem;
+  line-height: 1.6;
+  animation: fadeText 1.2s ease forwards;
+  animation-delay: 1.8s;
+}
 
-    .enter {
-      display: inline-block;
-      font-size: 0.7rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: white;
-      text-decoration: none;
-      border-bottom: 1px solid rgba(255,255,255,0.4);
-      padding-bottom: 4px;
-      transition: opacity 0.3s ease;
-    }
+@keyframes fadeText {
+  to { opacity: 0.75; }
+}
 
-    .enter:hover {
-      opacity: 0.6;
-    }
+.enter {
+  display: inline-block;
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: white;
+  text-decoration: none;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(255,255,255,0.4);
+  opacity: 0;
+  animation: fadeText 1.2s ease forwards;
+  animation-delay: 2.4s;
+  transition: opacity 0.3s ease;
+}
 
-    .footer-mark {
-      position: fixed;
-      bottom: 25px;
-      left: 25px;
-      font-size: 0.7rem;
-      letter-spacing: 0.3em;
-      font-weight: bold;
-    }
+/* subtle pulse */
+.enter:hover {
+  opacity: 0.6;
+}
 
-    @media (max-width: 600px) {
-      .headline {
-        font-size: 1.1rem;
-      }
-    }
-  </style>
+.enter::after {
+  content: "";
+  display: block;
+  height: 1px;
+  background: white;
+  margin-top: 6px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.enter:hover::after {
+  transform: scaleX(1);
+}
+
+.footer-mark {
+  position: fixed;
+  bottom: 25px;
+  left: 25px;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  font-weight: bold;
+  opacity: 0.5;
+}
+
+@media (max-width: 600px) {
+  .headline {
+    font-size: 1.1rem;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <img src="logo.png" alt="MAANGAS" class="logo">
+  <img src="logo.png" alt="MAANGAS" class="logo">
 
-    <div class="status">MEMBER STATUS CONFIRMED</div>
+  <div class="status">MEMBER STATUS CONFIRMED</div>
 
-    <div class="headline">
-      ACCESS GRANTED
-    </div>
-
-    <div class="sub-text">
-      You are now part of Drop 001.<br>
-      Release details will be delivered privately.
-    </div>
-
-    <a href="early.html" class="enter">
-      ENTER MEMBERS AREA
-    </a>
-
+  <div class="headline">
+    ACCESS GRANTED
   </div>
 
-  <div class="footer-mark">MAANGAS © 2026</div>
+  <div class="sub-text">
+    You now hold priority access to Drop 001.<br>
+    Release information will be delivered privately.
+  </div>
+
+  <a href="early.html" class="enter">
+    ENTER MEMBERS AREA
+  </a>
+
+</div>
+
+<div class="footer-mark">MAANGAS © 2026</div>
 
 </body>
 </html>
