@@ -26,7 +26,6 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      overflow: hidden;
       animation: fadeIn 1.2s ease forwards;
     }
 
@@ -35,7 +34,6 @@
       to { opacity: 1; }
     }
 
-    /* Dark overlay */
     body::before {
       content: "";
       position: fixed;
@@ -44,7 +42,6 @@
       z-index: -1;
     }
 
-    /* Top Navigation */
     .nav {
       position: fixed;
       top: 25px;
@@ -126,6 +123,11 @@
       color: white;
     }
 
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
     .instagram {
       display: inline-flex;
       align-items: center;
@@ -168,7 +170,6 @@
 
 <body>
 
-  <!-- NAV -->
   <div class="nav">
     <a href="shop.html">SHOP</a>
   </div>
@@ -178,22 +179,19 @@
 
     <p class="drop-text">DROP 001 — COMING SOON</p>
 
-    <!-- BUTTONDOWN FORM -->
-    <form
-  action="https://buttondown.com/api/emails/embed-subscribe/maangas.co"
-  method="post"
->
-  <input type="hidden" name="redirect" value="https://maangas.co/thanks.html">
+    <!-- EMAIL FORM -->
+    <form id="email-form">
+      <input
+        type="email"
+        id="email"
+        placeholder="ENTER EMAIL"
+        required
+      >
 
-  <input
-    type="email"
-    name="email"
-    placeholder="ENTER EMAIL"
-    required
-  >
-
-  <button type="submit">JOIN THE LIST</button>
-</form>
+      <button type="submit" id="submit-btn">
+        JOIN THE LIST
+      </button>
+    </form>
 
     <!-- INSTAGRAM -->
     <a href="https://instagram.com/maangascompany" target="_blank" class="instagram">
@@ -202,10 +200,45 @@
       </svg>
       @maangascompany
     </a>
-
   </div>
 
   <div class="footer-mark">MAANGAS © 2026</div>
+
+  <script>
+    const form = document.getElementById("email-form");
+    const button = document.getElementById("submit-btn");
+
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById("email").value;
+
+      button.disabled = true;
+      button.innerText = "PROCESSING...";
+
+      try {
+        await fetch("https://buttondown.com/api/emails/embed-subscribe/maangas.co", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: new URLSearchParams({
+            email: email
+          }),
+        });
+
+        document.body.style.opacity = "0";
+        setTimeout(() => {
+          window.location.href = "thanks.html";
+        }, 600);
+
+      } catch (error) {
+        button.disabled = false;
+        button.innerText = "JOIN THE LIST";
+        alert("Something went wrong. Please try again.");
+      }
+    });
+  </script>
 
 </body>
 </html>
