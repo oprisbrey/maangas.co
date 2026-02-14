@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MEMBERS — MAANGAS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  background: black;
+  color: white;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+
+input {
+  padding: 1rem;
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+  text-transform: uppercase;
+  margin-top: 1rem;
+}
+
+button {
+  padding: 1rem;
+  background: white;
+  color: black;
+  border: none;
+  margin-left: 0.5rem;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div>
+  <h2>MEMBERS ONLY</h2>
+  <p>Enter access code</p>
+  <input type="password" id="password">
+  <button onclick="checkPassword()">ENTER</button>
+</div>
+
+<script>
+function checkPassword() {
+  const password = document.getElementById("password").value;
+
+  if (password === "DROP001") {
+    window.location.href = "shop.html";
+  } else {
+    alert("Incorrect code.");
+  }
+}
+</script>
+
+</body>
+</html>
