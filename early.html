@@ -2,62 +2,110 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>MEMBERS — MAANGAS</title>
+<title>Members Access — MAANGAS</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
 body {
-  background: black;
+  background: url("background.jpg") center center / cover no-repeat;
+  font-family: "Helvetica Neue", Arial, sans-serif;
   color: white;
-  font-family: 'Helvetica Neue', Arial, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   text-align: center;
+  position: relative;
+}
+
+/* Dark overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  z-index: 0;
+}
+
+/* Grain */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .container {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
   width: 90%;
-  max-width: 400px;
+  animation: fadeIn 1.6s ease forwards;
+  opacity: 0;
 }
 
-h2 {
-  letter-spacing: 0.3em;
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+.logo {
+  width: 60%;
+  max-width: 240px;
+  margin-bottom: 3rem;
+  opacity: 0.9;
+}
+
+.headline {
+  font-size: 1.4rem;
+  letter-spacing: 0.35em;
   text-transform: uppercase;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
-input {
-  padding: 1rem;
-  background: transparent;
-  border: 2px solid white;
-  color: white;
-  text-transform: uppercase;
-  width: 100%;
-  margin-top: 1rem;
-}
-
-button {
-  padding: 1rem;
-  background: white;
-  color: black;
-  border: none;
-  width: 100%;
-  margin-top: 1rem;
-  cursor: pointer;
+.sub {
+  font-size: 0.8rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 3rem;
+  line-height: 1.6;
 }
 
-.error {
-  margin-top: 1rem;
+.enter-shop {
+  display: inline-block;
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: white;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.4);
+  padding-bottom: 4px;
+  transition: opacity 0.3s ease;
+}
+
+.enter-shop:hover {
+  opacity: 0.6;
+}
+
+.footer {
+  position: fixed;
+  bottom: 25px;
+  left: 25px;
   font-size: 0.7rem;
   letter-spacing: 0.3em;
-  text-transform: uppercase;
-  opacity: 0;
-  color: red;
-  transition: opacity 0.3s ease;
+  opacity: 0.5;
 }
 </style>
 </head>
@@ -65,32 +113,26 @@ button {
 <body>
 
 <div class="container">
-  <h2>Members Only</h2>
-  <p>Enter access code</p>
 
-  <input type="password" id="password">
-  <button onclick="checkPassword()">Enter</button>
+  <img src="logo.png" alt="MAANGAS" class="logo">
 
-  <div class="error" id="error-msg">
-    ACCESS DENIED
+  <div class="headline">
+    DROP 001
   </div>
+
+  <div class="sub">
+    Private Release.<br>
+    Limited Units.<br>
+    No Restocks.
+  </div>
+
+  <a href="shop.html" class="enter-shop">
+    ENTER SHOP
+  </a>
+
 </div>
 
-<script>
-function checkPassword() {
-  const password = document.getElementById("password").value;
-  const errorMsg = document.getElementById("error-msg");
-
-  if (password === "DROP001") {
-    document.body.style.opacity = "0";
-    setTimeout(() => {
-      window.location.href = "shop.html";
-    }, 500);
-  } else {
-    errorMsg.style.opacity = "1";
-  }
-}
-</script>
+<div class="footer">MAANGAS © 2026</div>
 
 </body>
 </html>
