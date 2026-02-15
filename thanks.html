@@ -17,37 +17,49 @@ html, body {
 }
 
 body {
-  background: #000;
-  color: #fff;
+  background: url("background.jpg") center center / cover no-repeat;
   font-family: "Helvetica Neue", Arial, sans-serif;
+  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
+  position: relative;
   overflow: hidden;
 }
 
-/* Grain overlay */
+/* Dark cinematic overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.78);
+  z-index: 0;
+}
+
+/* Subtle grain texture */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
   background-image: url("https://grainy-gradients.vercel.app/noise.svg");
-  opacity: 0.06;
+  opacity: 0.05;
   pointer-events: none;
+  z-index: 1;
 }
 
-/* Fade in animation */
 .container {
-  opacity: 0;
-  transform: translateY(10px);
-  animation: reveal 1.6s ease forwards;
-  animation-delay: 0.4s;
+  position: relative;
+  z-index: 2;
   max-width: 650px;
   width: 90%;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeIn 1.6s ease forwards;
+  animation-delay: 0.4s;
 }
 
-@keyframes reveal {
+@keyframes fadeIn {
   to {
     opacity: 1;
     transform: translateY(0);
@@ -71,27 +83,18 @@ body::after {
 
 .headline {
   font-size: 1.5rem;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.35em;
   text-transform: uppercase;
   margin-bottom: 2rem;
-  opacity: 0;
-  animation: fadeText 1.2s ease forwards;
-  animation-delay: 1.2s;
 }
 
 .sub-text {
   font-size: 0.85rem;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  opacity: 0;
+  opacity: 0.7;
   margin-bottom: 3rem;
   line-height: 1.6;
-  animation: fadeText 1.2s ease forwards;
-  animation-delay: 1.8s;
-}
-
-@keyframes fadeText {
-  to { opacity: 0.75; }
 }
 
 .enter {
@@ -101,48 +104,22 @@ body::after {
   text-transform: uppercase;
   color: white;
   text-decoration: none;
-  padding-bottom: 4px;
   border-bottom: 1px solid rgba(255,255,255,0.4);
-  opacity: 0;
-  animation: fadeText 1.2s ease forwards;
-  animation-delay: 2.4s;
+  padding-bottom: 4px;
   transition: opacity 0.3s ease;
 }
 
-/* subtle pulse */
 .enter:hover {
   opacity: 0.6;
 }
 
-.enter::after {
-  content: "";
-  display: block;
-  height: 1px;
-  background: white;
-  margin-top: 6px;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s ease;
-}
-
-.enter:hover::after {
-  transform: scaleX(1);
-}
-
-.footer-mark {
+.footer {
   position: fixed;
   bottom: 25px;
   left: 25px;
   font-size: 0.7rem;
   letter-spacing: 0.3em;
-  font-weight: bold;
   opacity: 0.5;
-}
-
-@media (max-width: 600px) {
-  .headline {
-    font-size: 1.1rem;
-  }
 }
 </style>
 </head>
@@ -170,7 +147,7 @@ body::after {
 
 </div>
 
-<div class="footer-mark">MAANGAS © 2026</div>
+<div class="footer">MAANGAS © 2026</div>
 
 </body>
 </html>
