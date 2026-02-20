@@ -29,7 +29,7 @@ nav {
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:2rem 3rem;
+  padding:2.5rem 3rem; /* taller nav for bigger logo */
   font-size:0.75rem;
   letter-spacing:0.35em;
   text-transform:uppercase;
@@ -42,7 +42,7 @@ nav a {
 }
 
 .nav-logo {
-  height:48px;        /* 🔥 Bigger logo */
+  height:96px; /* 🔥 doubled size */
   width:auto;
   display:block;
 }
@@ -236,8 +236,8 @@ footer {
 /* MOBILE */
 @media (max-width:768px) {
   .products { padding:0 2rem 4rem; gap:3rem; }
-  nav { padding:1.5rem; }
-  .nav-logo { height:38px; } /* slightly smaller on mobile */
+  nav { padding:2rem; }
+  .nav-logo { height:60px; } /* scaled down for mobile */
 }
 
 @media(max-width:400px){
@@ -303,8 +303,8 @@ function renderProducts(){
     container.innerHTML += `
       <div class="product">
         <div class="product-image">
-          <img src="${product.imageFront}" alt="${product.name} Front" class="main-img">
-          <img src="${product.imageBack}" alt="${product.name} Back" class="hover-img">
+          <img src="${product.imageFront}" class="main-img">
+          <img src="${product.imageBack}" class="hover-img">
         </div>
         <div class="product-name">${product.name}</div>
         <div class="product-price">$${product.price}</div>
