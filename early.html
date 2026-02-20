@@ -37,7 +37,7 @@ body::before {
   z-index: 0;
 }
 
-/* Grain */
+/* Grain texture */
 body::after {
   content: "";
   position: fixed;
@@ -46,6 +46,22 @@ body::after {
   opacity: 0.05;
   pointer-events: none;
   z-index: 1;
+}
+
+/* Top Left Logo */
+.top-logo {
+  position: fixed;
+  top: 25px;
+  left: 30px;
+  width: 63px;
+  height: auto;
+  z-index: 3;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.top-logo:hover {
+  opacity: 0.6;
 }
 
 .container {
@@ -129,6 +145,11 @@ button:hover {
 </head>
 
 <body>
+
+<!-- Top Left Clickable Logo -->
+<a href="index.html">
+  <img src="logo.png" alt="MAANGAS" class="top-logo">
+</a>
 
 <div class="container">
 
