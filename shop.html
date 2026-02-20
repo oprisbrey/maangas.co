@@ -28,6 +28,7 @@ body::before {
 nav {
   display:flex;
   justify-content:space-between;
+  align-items:center;
   padding:2rem 3rem;
   font-size:0.75rem;
   letter-spacing:0.35em;
@@ -38,6 +39,12 @@ nav a {
   color:white;
   text-decoration:none;
   cursor:pointer;
+}
+
+.nav-logo {
+  height:32px;
+  width:auto;
+  display:block;
 }
 
 /* HERO */
@@ -102,7 +109,6 @@ nav a {
   letter-spacing:0.2em;
 }
 
-/* FIXED SELECT STYLING */
 select {
   margin-top:1rem;
   padding:0.8rem;
@@ -119,7 +125,6 @@ select option {
   color:white;
 }
 
-/* BUTTON */
 button {
   margin-top:1.2rem;
   padding:1rem;
@@ -243,7 +248,9 @@ footer {
 <body>
 
 <nav>
-  <a href="index.html">MAANGAS</a>
+  <a href="index.html">
+    <img src="logo.png" alt="MAANGAS Logo" class="nav-logo">
+  </a>
   <a onclick="toggleCart()">CART (<span id="cart-count">0</span>)</a>
 </nav>
 
@@ -292,7 +299,7 @@ function renderProducts(){
   container.innerHTML = "";
 
   productsData.forEach((product, idx) => {
-    container.innerHTML += `
+    const productHTML = `
       <div class="product">
         <div class="product-image">
           <img src="${product.imageFront}" alt="${product.name} Front" class="main-img">
@@ -304,9 +311,12 @@ function renderProducts(){
           <option value="">Select Size</option>
           ${product.sizes.map(size => `<option>${size}</option>`).join("")}
         </select>
-        <button onclick="addToCart('${product.name}', ${product.price}, 'size-${idx}')">Add to Cart</button>
+        <button onclick="addToCart('${product.name}', ${product.price}, 'size-${idx}')">
+          Add to Cart
+        </button>
       </div>
     `;
+    container.innerHTML += productHTML;
   });
 }
 
